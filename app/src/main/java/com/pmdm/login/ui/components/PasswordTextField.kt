@@ -20,7 +20,9 @@ import androidx.compose.ui.text.input.VisualTransformation
 fun PasswordTextField(
     password: String,
     onPasswordValueChanged: (String) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    label: String = "Contraseña",
+    isError: Boolean = false,
 ) {
     var passwordVisible by remember { mutableStateOf(false) }
 
@@ -30,7 +32,8 @@ fun PasswordTextField(
             VisualTransformation.None
         else PasswordVisualTransformation(),
         onValueChange = onPasswordValueChanged,
-        label = { Text("Contraseña") },
+        label = { Text(label) },
+        isError = isError,
         leadingIcon = {
             val image = if(passwordVisible)
                 Icons.Filled.Visibility
