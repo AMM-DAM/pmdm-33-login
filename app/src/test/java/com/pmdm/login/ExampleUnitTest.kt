@@ -1,4 +1,4 @@
-package com.pmdm.androidtemplate
+package com.pmdm.login
 
 import org.junit.Test
 

@@ -1,4 +1,4 @@
-package com.pmdm.androidtemplate.ui.theme
+package com.pmdm.login.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
