@@ -21,8 +21,8 @@ fun PasswordTextField(
     password: String,
     onPasswordValueChanged: (String) -> Unit,
     modifier: Modifier = Modifier,
+    errorMessage: String? = null,
     label: String = "Contraseña",
-    isError: Boolean = false,
 ) {
     var passwordVisible by remember { mutableStateOf(false) }
 
@@ -33,7 +33,8 @@ fun PasswordTextField(
         else PasswordVisualTransformation(),
         onValueChange = onPasswordValueChanged,
         label = { Text(label) },
-        isError = isError,
+        isError = errorMessage != null,
+        supportingText = { if (errorMessage != null) Text(errorMessage) },
         leadingIcon = {
             val image = if(passwordVisible)
                 Icons.Filled.Visibility

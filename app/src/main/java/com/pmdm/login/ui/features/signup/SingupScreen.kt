@@ -84,7 +84,7 @@ fun SignupForm(
                 passwordRepeat,
                 onPasswordRepeatChanged,
                 label = "Repetir contraseña",
-                isError = !isRepeatPasswordMatch,
+                errorMessage = if (!isRepeatPasswordMatch) "Las contraseñas no coinciden" else null,
                 modifier = modifierFillMaxWidth
             )
             Spacer(Modifier.height(16.dp))
