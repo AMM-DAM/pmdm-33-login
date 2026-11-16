@@ -86,6 +86,9 @@ fun GestorColeccionesApp() {
                                 validacion = validadorLogin.valida(loginUiState)
                             )
                         }
+                        LoginEvent.OnNavigateToSignup -> {
+                            pantallaActual = Pantalla.SIGNUP
+                        }
                     }
                 }
             )
