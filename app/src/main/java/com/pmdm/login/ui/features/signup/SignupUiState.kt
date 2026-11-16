@@ -5,7 +5,6 @@ data class SignupUiState(
     val username: String = "",
     val password: String = "",
     val passwordRepeat: String = "",
-    val isRepeatPasswordMatch: String = "",
     val acceptToC: Boolean = false,
     val validacion: ValidacionSignupUiState = ValidacionSignupUiState()
 )
