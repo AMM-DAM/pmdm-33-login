@@ -27,7 +27,7 @@ import com.pmdm.login.ui.components.PasswordTextField
 import com.pmdm.login.ui.theme.LoginTheme
 
 @Composable
-fun SignupForm(uiState: SignupUiState) {
+fun SignupForm(uiState: SignupUiState, onSignupEvent: (SignupEvent) -> Unit) {
     val modifierFillMaxWidth = Modifier.fillMaxWidth()
     ElevatedCard(
         elevation = CardDefaults.elevatedCardElevation(),
@@ -37,7 +37,7 @@ fun SignupForm(uiState: SignupUiState) {
         ) {
             OutlinedTextField(
                 value = uiState.email,
-                onValueChange = onEmailChanged,
+                onValueChange = { onSignupEvent(SignupEvent.OnEmailChanged(it)) },
                 label = { Text("Correo electrónico") },
                 leadingIcon = {
                     Icon(
@@ -50,7 +50,7 @@ fun SignupForm(uiState: SignupUiState) {
             Spacer(Modifier.height(8.dp))
             OutlinedTextField(
                 value = uiState.username,
-                onValueChange = onUsernameChanged,
+                onValueChange = { onSignupEvent(SignupEvent.OnUsernameChanged(it)) },
                 label = { Text("Nombre usuario") },
                 leadingIcon = {
                     Icon(
@@ -63,25 +63,25 @@ fun SignupForm(uiState: SignupUiState) {
             Spacer(Modifier.height(8.dp))
             PasswordTextField(
                 uiState.password,
-                onPasswordChanged,
+                onPasswordValueChanged = { onSignupEvent(SignupEvent.OnPasswordChanged(it)) },
                 modifier = modifierFillMaxWidth
             )
             Spacer(Modifier.height(8.dp))
             PasswordTextField(
                 uiState.passwordRepeat,
-                onPasswordRepeatChanged,
+                onPasswordValueChanged = { onSignupEvent(SignupEvent.OnPasswordRepeatChanged(it)) },
                 label = "Repetir contraseña",
-                errorMessage = if (!isRepeatPasswordMatch) "Las contraseñas no coinciden" else null,
+                errorMessage = if (true) "Las contraseñas no coinciden" else null,
                 modifier = modifierFillMaxWidth
             )
             Spacer(Modifier.height(16.dp))
             CheckboxWithLabel(
                 label = "Acepto los términos y condiciones",
                 checkedState = uiState.acceptToC,
-                onStateChange = onAcceptToCChanged,
+                onStateChange = { onSignupEvent(SignupEvent.OnAcceptToCChanged) },
             )
             Spacer(Modifier.height(16.dp))
-            Button(onClick = onSignup, modifierFillMaxWidth) {
+            Button(onClick = { onSignupEvent(SignupEvent.OnSignup) }, modifierFillMaxWidth) {
                 Text("Crear cuenta")
             }
         }
@@ -89,19 +89,53 @@ fun SignupForm(uiState: SignupUiState) {
 }
 
 @Composable
-fun SignupScreen(uiState: SignupUiState) {
+fun SignupScreen(uiState: SignupUiState, onSignupEvent: (SignupEvent) -> Unit) {
     Column(modifier = Modifier.padding(20.dp)) {
-        SignupForm(uiState)
+        SignupForm(uiState, onSignupEvent)
     }
 }
 
 @Preview(showBackground = true)
 @Composable
 fun SignupScreenPreview() {
-    var signupUiState by remember { mutableStateOf(SignupUiState()) }
-
+    var signupUiState by remember   { mutableStateOf(SignupUiState()) }
+    val onSignupEvent: (SignupEvent) -> Unit = { event ->
+        when (event) {
+            is SignupEvent.OnEmailChanged -> {
+                // TODO: Run validator
+                signupUiState = signupUiState.copy(
+                    email = event.email
+                )
+            }
+            is SignupEvent.OnUsernameChanged -> {
+                // TODO: Run validator
+                signupUiState = signupUiState.copy(
+                    username = event.username
+                )
+            }
+            is SignupEvent.OnPasswordChanged -> {
+                // TODO: Run validator
+                signupUiState = signupUiState.copy(
+                    password = event.password
+                )
+            }
+            is SignupEvent.OnPasswordRepeatChanged -> {
+                // TODO: Run validator
+                signupUiState = signupUiState.copy(
+                    passwordRepeat = event.passwordRepeat
+                )
+            }
+            SignupEvent.OnAcceptToCChanged -> {
+                // TODO: Run validator
+                signupUiState = signupUiState.copy(
+                    acceptToC = !signupUiState.acceptToC
+                )
+            }
+            SignupEvent.OnSignup -> { }
+        }
+    }
     LoginTheme {
-        SignupScreen(signupUiState)
+        SignupScreen(signupUiState, onSignupEvent)
     }
 }
 
