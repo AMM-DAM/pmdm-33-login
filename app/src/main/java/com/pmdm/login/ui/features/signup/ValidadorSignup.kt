@@ -24,7 +24,7 @@ class ValidadorSignup(
 
     val validadorPassword = ValidadorCompuesto<String>()
         .add(ValidadorTextoNoVacio())
-        .add(ValidadorLongitudMinimaTexto(6))
+        .add(ValidadorLongitudMinimaTexto(8))
 
     val validadorPasswordRepeat = ValidadorCoincidePassword()
 

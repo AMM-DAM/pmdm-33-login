@@ -16,7 +16,7 @@ class ValidadorLogin(
 
     val validadorContrasena = ValidadorCompuesto<String>()
         .add(ValidadorTextoNoVacio("La clave no puede estar vacía"))
-        .add(ValidadorLongitudMinimaTexto(6, "La clave debe tener al menos 6 caracteres"))
+        .add(ValidadorLongitudMinimaTexto(8, "La clave debe tener al menos 8 caracteres"))
 
     override fun valida(datos: LoginUiState): ValidacionLoginUiState {
         val valCorreo = validadorCorreo.valida(datos.email)
