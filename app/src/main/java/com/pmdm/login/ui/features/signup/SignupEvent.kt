@@ -7,4 +7,5 @@ sealed interface SignupEvent {
     data class OnPasswordRepeatChanged(val passwordRepeat: String) : SignupEvent
     data object OnAcceptToCChanged : SignupEvent
     data object OnSignup : SignupEvent
+    data object OnNavigateToLogin : SignupEvent
 }

@@ -135,6 +135,9 @@ fun GestorColeccionesApp() {
                             val validacion = validadorSignup.valida(signupUiState)
                             signupUiState = signupUiState.copy(validacion = validacion)
                         }
+                        SignupEvent.OnNavigateToLogin -> {
+                            pantallaActual = Pantalla.LOGIN
+                        }
                     }
                 }
             )
