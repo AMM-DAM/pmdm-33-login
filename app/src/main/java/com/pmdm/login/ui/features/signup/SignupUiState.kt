@@ -11,5 +11,6 @@ data class SignupUiState(
     val password: String = "",
     val passwordRepeat: String = "",
     val isRepeatPasswordMatch: String = "",
-    val acceptToC: Boolean = false
+    val acceptToC: Boolean = false,
+    val validacion: ValidacionSignupScreen = ValidacionSignupScreen()
 )

@@ -115,7 +115,6 @@ fun LoginScreenPreview() {
                 loginUiState = loginUiState.copy(
                     validacion = validadorLogin.valida(loginUiState)
                 )
-
             }
         }
     }
