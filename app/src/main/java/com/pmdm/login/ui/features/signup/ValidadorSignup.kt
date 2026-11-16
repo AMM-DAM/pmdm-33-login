@@ -1,6 +1,5 @@
 package com.pmdm.login.ui.features.signup
 
-import com.github.pmdmiesbalmis.components.validacion.Validacion
 import com.github.pmdmiesbalmis.components.validacion.Validador
 import com.github.pmdmiesbalmis.components.validacion.ValidadorCompuesto
 import com.github.pmdmiesbalmis.components.validacion.validadores.ValidadorCorreo
@@ -28,13 +27,13 @@ class ValidadorSignup(
 
     val validadorPasswordRepeat = ValidadorCoincidePassword()
 
-    override fun valida(datos: SignupUiState): ValidacionSignupScreen {
+    override fun valida(datos: SignupUiState): ValidacionSignupUiState {
         val validacionEmail = validadorEmail.valida(datos.email)
         val validacionUsername = validadorUsername.valida(datos.username)
         val validacionPassword = validadorPassword.valida(datos.password)
         val validacionPasswordRepeat = validadorPasswordRepeat.valida(datos.passwordRepeat, datos.password)
 
-        return ValidacionSignupScreen(
+        return ValidacionSignupUiState(
             mensajeErrorGlobal = mensajeErrorGlobal,
             validacionEmail = validacionEmail,
             validacionUsername = validacionUsername,

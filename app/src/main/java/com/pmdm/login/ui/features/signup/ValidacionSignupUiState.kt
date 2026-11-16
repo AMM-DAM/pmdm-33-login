@@ -2,7 +2,7 @@ package com.pmdm.login.ui.features.signup
 
 import com.github.pmdmiesbalmis.components.validacion.Validacion
 
-data class ValidacionSignupScreen(
+data class ValidacionSignupUiState(
     var mensajeErrorGlobal: String? = "",
     var validacionEmail: Validacion = object: Validacion {},
     var validacionUsername: Validacion = object : Validacion {},
